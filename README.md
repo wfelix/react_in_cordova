@@ -47,3 +47,16 @@ android {
 
 
 # cordova build android
+
+
+/etc/apache2/sites-available/003-cibus-cordova.conf
+<VirtualHost *:88>
+    # ServerName seu-dominio.local
+    DocumentRoot /var/www/cibus-cordova 
+
+    <Directory /var/www/cibus-cordova>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
