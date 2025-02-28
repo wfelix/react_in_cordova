@@ -4,6 +4,7 @@ declare global {
   interface Navigator {
     camera: any;
     notification: any;
+    connection: any;
   }
 }
 
@@ -13,6 +14,8 @@ interface BatteryStatus {
 }
 
 const MenuSushi: React.FC = () => {
+  const [networkStatus, setNetworkStatus] = useState<string>("");
+
   const [batery, setBatery] = useState<BatteryStatus>({
     level: 0,
     isPlugged: false,
@@ -103,6 +106,14 @@ const MenuSushi: React.FC = () => {
     }
   };
 
+  const onOnline = () => {
+    // Handle the online event
+    var networkState = navigator.connection.type;
+
+    console.log("Connection type: " + networkState);
+    setNetworkStatus(networkState);
+  };
+
   return (
     <div>
       {imageSrc && (
@@ -127,11 +138,15 @@ const MenuSushi: React.FC = () => {
 
         <button onClick={getLocation}>Obter Localização</button>
 
-        <button disabled onClick={triggerVibration}>Ativar Vibração (Não funciona)</button>
+        <button disabled onClick={triggerVibration}>
+          Ativar Vibração (Não funciona)
+        </button>
 
         <button onClick={batteryStatus}>Verificar Bateria</button>
 
         <button onClick={notification}>Notificação</button>
+
+        <button onClick={onOnline}>Network</button>
       </div>
 
       {position && (
@@ -149,6 +164,8 @@ const MenuSushi: React.FC = () => {
       )}
 
       {errorMsg && <p>Erro: {errorMsg}</p>}
+
+      {networkStatus && <p>Network: {networkStatus}</p>}
     </div>
   );
 };
