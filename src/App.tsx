@@ -1,5 +1,5 @@
-import "./App.css";
 import MenuSushi from "./MenuSushi";
+//import Functions from "./Functions";
 
 function App() {
   
