@@ -1,54 +1,49 @@
-# React + TypeScript + Vite
+Alterar o arquivo 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+platforms/android/phonegap-plugin-barcodescanner/cordovareactapp-barcodescanner.gradle
 
-Currently, two official plugins are available:
+de:
+compile(name: 'barcodescanner-release-2.1.5', ext:'aar')
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+para:
+implementation(name: 'barcodescanner-release-2.1.5', ext:'aar')
 
-## Expanding the ESLint configuration
+## NÃO MODIFIQUEI ESSE
+platforms/android/app/build.gradle
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+android {
+    compileSdkVersion 33
+    buildToolsVersion "33.0.0"
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+    defaultConfig {
+        applicationId "io.cordova.hellocordova"
+        minSdkVersion 21
+        targetSdkVersion 33
+        versionCode 1
+        versionName "1.0.0"
+    }
+    ...
+}
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+# cordova clean android
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+repositories{
+    jcenter()
+    flatDir{
+        dirs 'libs'
+    }
+}
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+dependencies {
+    implementation(name: 'barcodescanner-release-2.1.5', ext:'aar')
+}
+
+android {
+    packagingOptions {
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
+}
+
+
+# cordova build android

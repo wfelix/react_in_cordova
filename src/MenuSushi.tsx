@@ -6,6 +6,8 @@ declare global {
     notification: any;
     connection: any;
   }
+  
+  const cordova: any;
 }
 
 interface BatteryStatus {
@@ -114,6 +116,39 @@ const MenuSushi: React.FC = () => {
     setNetworkStatus(networkState);
   };
 
+  const scanQRCode = () => {
+    if (cordova && cordova.plugins && cordova.plugins.barcodeScanner) {
+      cordova.plugins.barcodeScanner.scan(
+        (result: { text: string; format: string; cancelled: boolean }) => {
+          // Exemplo de retorno:
+          // result.text - contém o conteúdo do QR Code
+          // result.format - formato do código (ex: "QR_CODE")
+          // result.cancelled - flag indicando se a leitura foi cancelada
+          if (!result.cancelled) {
+        alert(`Conteúdo: ${result.text}\nFormato: ${result.format}`);
+          } else {
+        console.log("Leitura cancelada");
+          }
+        },
+        (error: any) => {
+          console.error("Erro ao escanear o QR Code:", error);
+        },
+        {
+          preferFrontCamera: false,
+          showFlipCameraButton: true,
+          showTorchButton: true,
+          torchOn: false,
+          prompt: "Posicione o QR Code dentro da área de leitura",
+          resultDisplayDuration: 1500,
+          formats: "QR_CODE", // ou deixe em branco para ler vários formatos
+          orientation: "portrait",
+        }
+      );
+    } else {
+      console.error("Plugin de scanner não disponível.");
+    }
+  };
+
   return (
     <div>
       {imageSrc && (
@@ -147,6 +182,8 @@ const MenuSushi: React.FC = () => {
         <button onClick={notification}>Notificação</button>
 
         <button onClick={onOnline}>Network</button>
+
+        <button onClick={scanQRCode}>QRCode</button>
       </div>
 
       {position && (
