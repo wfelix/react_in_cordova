@@ -6,7 +6,13 @@ declare global {
   }
 }
 
+interface BatteryStatus {
+  level: number;
+  isPlugged: boolean;
+}
+
 const MenuSushi: React.FC = () => {
+  const [batery, setBatery] = useState<BatteryStatus>({} as BatteryStatus);
   const [position, setPosition] = useState<{
     latitude: number;
     longitude: number;
@@ -65,6 +71,19 @@ const MenuSushi: React.FC = () => {
     }
   };
 
+  function onBatteryStatus(status: BatteryStatus) {
+    console.log("Level: " + status.level + " isPlugged: " + status.isPlugged);
+    setBatery(status);
+  }
+
+  const batteryStatus = () => {
+    window.addEventListener(
+      "batterystatus",
+      (event: any) => onBatteryStatus(event as BatteryStatus),
+      false
+    );
+  };
+
   return (
     <div>
       {imageSrc && (
@@ -90,6 +109,8 @@ const MenuSushi: React.FC = () => {
         <button onClick={getLocation}>Obter Localização</button>
 
         <button onClick={triggerVibration}>Ativar Vibração</button>
+
+        <button onClick={batteryStatus}>Verificar Bateria</button>
       </div>
 
       {position && (
@@ -98,6 +119,14 @@ const MenuSushi: React.FC = () => {
           <p>Longitude: {position.longitude}</p>
         </div>
       )}
+
+      {batery && (
+        <div>
+          <p>Level: {batery.level}</p>
+          <p>isPlugged: {batery.isPlugged}</p>
+        </div>
+      )}
+
       {errorMsg && <p>Erro: {errorMsg}</p>}
     </div>
   );
