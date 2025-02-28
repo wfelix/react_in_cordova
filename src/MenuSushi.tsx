@@ -7,7 +7,10 @@ declare global {
 }
 
 const MenuSushi: React.FC = () => {
-  const [position, setPosition] = useState<{ latitude: number; longitude: number } | null>(null);
+  const [position, setPosition] = useState<{
+    latitude: number;
+    longitude: number;
+  } | null>(null);
   const [errorMsg, setErrorMsg] = useState<string>("");
 
   const [imageSrc, setImageSrc] = useState<string | null>(null);
@@ -22,13 +25,12 @@ const MenuSushi: React.FC = () => {
 
   const openCamera = () => {
     console.log("Abrindo câmera");
-    
-    navigator.camera.getPicture(onSuccess, onFail,
-      {
-          destinationType: navigator.camera.DestinationType.DATA_URL,
-          sourceType: navigator.camera.PictureSourceType.CAMERA,
-          quality: 100,
-      });
+
+    navigator.camera.getPicture(onSuccess, onFail, {
+      destinationType: navigator.camera.DestinationType.DATA_URL,
+      sourceType: navigator.camera.PictureSourceType.CAMERA,
+      quality: 100,
+    });
   };
 
   const getLocation = () => {
@@ -54,21 +56,42 @@ const MenuSushi: React.FC = () => {
     }
   };
 
+  const triggerVibration = () => {
+    if (navigator.vibrate) {
+      // Vibra por 1 segundo
+      navigator.vibrate(1000);
+    } else {
+      console.error("Vibração não suportada neste dispositivo.");
+    }
+  };
+
   return (
     <div>
-      
       {imageSrc && (
         <div className="mt-4">
-          <img src={imageSrc} alt="Capturada pela câmera" style={{ maxWidth: '100%' }} />
+          <img
+            src={imageSrc}
+            alt="Capturada pela câmera"
+            style={{ maxWidth: "100%" }}
+          />
         </div>
       )}
 
-      <button onClick={openCamera}>Abrir Câmera</button>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "1rem",
+        }}
+      >
+        <button onClick={openCamera}>Abrir Câmera</button>
 
+        <button onClick={getLocation}>Obter Localização</button>
 
-      <button onClick={getLocation}>
-        Obter Localização
-      </button>
+        <button onClick={triggerVibration}>Ativar Vibração</button>
+      </div>
+
       {position && (
         <div>
           <p>Latitude: {position.latitude}</p>
