@@ -3,6 +3,7 @@ import React, { useState } from "react";
 declare global {
   interface Navigator {
     camera: any;
+    notification: any;
   }
 }
 
@@ -84,6 +85,21 @@ const MenuSushi: React.FC = () => {
     );
   };
 
+  function alertDismissed() {
+    // do something
+  }
+
+  const notification = () => {
+    if (navigator.notification) {
+      navigator.notification.alert(
+        "You are the winner!", // message
+        alertDismissed, // callback
+        "Game Over", // title
+        "Done" // buttonName
+      );
+    }
+  };
+
   return (
     <div>
       {imageSrc && (
@@ -111,6 +127,8 @@ const MenuSushi: React.FC = () => {
         <button onClick={triggerVibration}>Ativar Vibração</button>
 
         <button onClick={batteryStatus}>Verificar Bateria</button>
+
+        <button onClick={notification}>Notificação</button>
       </div>
 
       {position && (
