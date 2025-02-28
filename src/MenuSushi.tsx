@@ -13,7 +13,10 @@ interface BatteryStatus {
 }
 
 const MenuSushi: React.FC = () => {
-  const [batery, setBatery] = useState<BatteryStatus>({} as BatteryStatus);
+  const [batery, setBatery] = useState<BatteryStatus>({
+    level: 0,
+    isPlugged: false,
+  });
   const [position, setPosition] = useState<{
     latitude: number;
     longitude: number;
@@ -124,7 +127,7 @@ const MenuSushi: React.FC = () => {
 
         <button onClick={getLocation}>Obter Localização</button>
 
-        <button onClick={triggerVibration}>Ativar Vibração</button>
+        <button disabled onClick={triggerVibration}>Ativar Vibração (Não funciona)</button>
 
         <button onClick={batteryStatus}>Verificar Bateria</button>
 
@@ -138,7 +141,7 @@ const MenuSushi: React.FC = () => {
         </div>
       )}
 
-      {batery && (
+      {batery.isPlugged && (
         <div>
           <p>Level: {batery.level}</p>
           <p>isPlugged: {batery.isPlugged}</p>
