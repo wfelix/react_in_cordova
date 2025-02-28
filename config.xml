@@ -12,6 +12,7 @@
     <allow-intent href="https://*/*" />
 
     <platform name="android">
+        <preference name="StatusBarBackgroundColor" value="#ff5a18" />
         <config-file target="AndroidManifest.xml" parent="/*"
             xmlns:android="http://schemas.android.com/apk/res/android">
             <uses-permission android:name="android.permission.CAMERA" />

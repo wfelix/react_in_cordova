@@ -691,6 +691,11 @@ cordova-plugin-geolocation@^5.0.0:
   resolved "https://registry.npmjs.org/cordova-plugin-geolocation/-/cordova-plugin-geolocation-5.0.0.tgz"
   integrity sha512-eIk96pF59y3AK+NHeyA0si9eFhZElgOcFoGoTU9LDlnEYpfBN+V4ojRpKq3NMLCGTozew22/i9najFu9Kvb40g==
 
+cordova-plugin-statusbar@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npmjs.org/cordova-plugin-statusbar/-/cordova-plugin-statusbar-4.0.0.tgz"
+  integrity sha512-NTVdQhj9msydnarCH8ijOhASx+6fO16hg17AilAjfzWRvcBoF+4kKkPhTkZM7D2bOBePhfHEaMhEnxnA3M4Dlg==
+
 cordova-plugin-vibration@^3.1.1:
   version "3.1.1"
   resolved "https://registry.npmjs.org/cordova-plugin-vibration/-/cordova-plugin-vibration-3.1.1.tgz"
