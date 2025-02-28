@@ -20,6 +20,7 @@
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",
     "cordova-android": "^13.0.0",
+    "cordova-electron": "^4.0.0",
     "cordova-plugin-battery-status": "^2.0.3",
     "cordova-plugin-camera": "^8.0.0",
     "cordova-plugin-device": "^3.0.0",
@@ -39,7 +40,8 @@
   },
   "cordova": {
     "platforms": [
-      "android"
+      "android",
+      "electron"
     ],
     "plugins": {
       "cordova-plugin-device": {},
