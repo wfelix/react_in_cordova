@@ -676,6 +676,11 @@ cordova-plugin-device@^3.0.0:
   resolved "https://registry.npmjs.org/cordova-plugin-device/-/cordova-plugin-device-3.0.0.tgz"
   integrity sha512-g8fFYOvleeYpklWvHwZ/T8/IzJe/3O0MGVDIUoqBru4v8SNDAbNVD3oOqoOQANBWGFQMg7GIkAAl8errCHZ7zQ==
 
+cordova-plugin-geolocation@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.npmjs.org/cordova-plugin-geolocation/-/cordova-plugin-geolocation-5.0.0.tgz"
+  integrity sha512-eIk96pF59y3AK+NHeyA0si9eFhZElgOcFoGoTU9LDlnEYpfBN+V4ojRpKq3NMLCGTozew22/i9najFu9Kvb40g==
+
 cross-spawn@^7.0.3, cross-spawn@^7.0.6:
   version "7.0.6"
   resolved "https://registry.npmjs.org/cross-spawn/-/cross-spawn-7.0.6.tgz"

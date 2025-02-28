@@ -7,6 +7,9 @@ declare global {
 }
 
 const MenuSushi: React.FC = () => {
+  const [position, setPosition] = useState<{ latitude: number; longitude: number } | null>(null);
+  const [errorMsg, setErrorMsg] = useState<string>("");
+
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   function onSuccess(imageData: string) {
     console.log(imageData);
@@ -28,6 +31,29 @@ const MenuSushi: React.FC = () => {
       });
   };
 
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const { latitude, longitude } = pos.coords;
+          console.log("Localização obtida:", latitude, longitude);
+          setPosition({ latitude, longitude });
+        },
+        (error) => {
+          console.error("Erro ao obter localização:", error);
+          setErrorMsg(error.message);
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0,
+        }
+      );
+    } else {
+      setErrorMsg("Geolocalização não é suportada neste dispositivo.");
+    }
+  };
+
   return (
     <div>
       
@@ -38,6 +64,18 @@ const MenuSushi: React.FC = () => {
       )}
 
       <button onClick={openCamera}>Abrir Câmera</button>
+
+
+      <button onClick={getLocation}>
+        Obter Localização
+      </button>
+      {position && (
+        <div>
+          <p>Latitude: {position.latitude}</p>
+          <p>Longitude: {position.longitude}</p>
+        </div>
+      )}
+      {errorMsg && <p>Erro: {errorMsg}</p>}
     </div>
   );
 };
